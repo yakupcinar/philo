@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycinarog <ycinarog@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: ycinarog <ycinarog@student.42istanbul.com  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 01:05:29 by ycinarog          #+#    #+#             */
 /*   Updated: 2026/06/29 18:56:24 by ycinarog         ###   ########.fr       */
