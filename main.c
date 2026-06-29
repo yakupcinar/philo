@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycinarog <ycinarog@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: ycinarog <ycinarog@student.42istanbul.com  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 01:05:13 by ycinarog          #+#    #+#             */
 /*   Updated: 2026/06/29 19:30:39 by ycinarog         ###   ########.fr       */
@@ -57,8 +57,3 @@ int	main(int argc, char **argv)
 	clean_up(&data, philos);
 	return (0);
 }
-
-
-// yemek yeme süreni belirledin
-// düşünme süreni de belirlemen lazım 
-//
