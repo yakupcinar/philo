@@ -1,4 +1,4 @@
-**Philo projesi klasör içinde mi pushlancak subject'te öyle gözüküyor. (expected files)
+***PHILO KLASORÜ İÇERİSİNDE VERİLECEK İNDİĞİNDE PHİLO KLASÖRÜ VE YANINDA READ.ME OLUCAK (KOD PROJE FİLO İÇİNDE OLACAK)
 
 
 
