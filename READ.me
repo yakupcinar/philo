@@ -1,0 +1,69 @@
+42 Philosophers 🍝
+I never thought philosophy would be so deadly.
+
+Bu proje, işletim sistemlerindeki eşzamanlılık (concurrency), multithreading ve senkronizasyon kavramlarını öğrenmek için klasik Yemek Yiyen Filozoflar (Dining Philosophers) probleminin C dilinde simüle edilmesidir.
+
+📝 Proje Hakkında (Mandatory Part)
+Projenin zorunlu (mandatory) kısmında filozoflar thread'ler (iş parçacıkları) ile, paylaşılan kaynaklar olan çatallar ise mutex'ler (kilitler) ile temsil edilmiştir.
+
+Her filozof bağımsız bir pthread olarak çalışır.
+
+Masanın ortasındaki çatallar pthread_mutex ile korunur.
+
+Amaç: Hiçbir filozofun açlıktan ölmemesini sağlamak ve Deadlock (kilitlenme) ile Data Race (veri yarışması) durumlarını sıfıra indirmektir.
+
+Not: 42 kuralları gereği projede libft kullanılmamıştır ve tüm bellek yönetimi (leaks) kusursuzdur.
+
+⚙️ Algoritma Mantığı
+Asimetrik Çatal Alma: Kilitlenmeyi (deadlock) önlemek için filozoflar rastgele değil, her zaman numarası (ID'si) küçük olan çatalı önce alırlar. Bu sayede masanın başındaki ve sonundaki filozof aynı çatal için yarışır ve ölüm çemberi kırılır.
+
+Başlangıç Gecikmesi (Offset): Trafik sıkışıklığını önlemek için simülasyonun başında çift numaralı filozoflar çok kısa bir süre bekletilir. Böylece tek numaralılar çatalları sorunsuz bir şekilde alarak kusursuz bir senkronizasyon döngüsü başlatır.
+
+🛠️ Kurulum ve Derleme
+Projeyi klonladıktan sonra terminalde klasörün içine girin ve make komutunu çalıştırın.
+
+Bash
+git clone https://github.com/JacobCinar03/42_philo.git
+cd 42_philo
+make
+Kullanılabilir Makefile Komutları:
+
+make: Projeyi derler ve philo çalıştırılabilir dosyasını oluşturur.
+
+make clean: Derleme sırasında oluşan .o (object) dosyalarını temizler.
+
+make fclean: Object dosyalarını ve philo dosyasını tamamen siler.
+
+make re: Projeyi tamamen temizler ve sıfırdan yeniden derler.
+
+🚀 Kullanım
+Program 4 veya 5 argüman ile çalıştırılır: Zamanlamalar milisaniye (ms) cinsinden girilmelidir.
+
+Bash
+./philo [filozof_sayısı] [ölme_süresi] [yeme_süresi] [uyuma_süresi] [hedef_yemek_sayısı (opsiyonel)]
+number_of_philosophers: Masadaki filozof (ve dolayısıyla çatal) sayısı.
+
+time_to_die: Bir filozofun son yemeğinin başlangıcından itibaren açlıktan ölmesi için geçen süre.
+
+time_to_eat: Bir filozofun yemek yemesi için gereken süre (iki çatala ihtiyacı vardır).
+
+time_to_sleep: Filozofun uyumak için harcadığı süre.
+
+number_of_times_each_philosopher_must_eat (opsiyonel): Tüm filozoflar bu sayı kadar yemek yerse simülasyon kimse ölmeden, bellek temizliği yapılarak başarıyla durur. Belirtilmezse simülasyon biri ölene kadar devam eder.
+
+🧪 Test Örnekleri
+1. Sınırda Hayatta Kalma (Trafik ve Senkronizasyon Testi)
+Hiç kimse ölmemelidir (Durdurmak için Ctrl+C):
+
+Bash
+./philo 4 410 200 200
+2. Hedefli ve Temiz Çıkış (Leak Testi İçin İdeal)
+Herkes en az 7 kez yemek yer ve program bellekleri temizleyip (free) otomatik kapanır:
+
+Bash
+./philo 5 800 200 200 7
+3. Açlıktan Kaçınılmaz Ölüm
+Zaman yetersiz olduğu için bir filozofun tam zamanında (yaklaşık 310. milisaniyede) ölmesi gerekir:
+
+Bash
+./philo 4 310 200 100
