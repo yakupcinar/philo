@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   leak.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycinarog <ycinarog@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: ycinarog <ycinarog@student.42istanbul.com  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 01:06:21 by ycinarog          #+#    #+#             */
 /*   Updated: 2026/06/29 18:26:29 by ycinarog         ###   ########.fr       */
