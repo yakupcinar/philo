@@ -50,3 +50,50 @@ Soru: Neden filozoflar kendi döngüleri içinde kendi ölümlerini kontrol etmi
 
 Cevap: Çünkü bir filozof ft_usleep fonksiyonuyla uyurken veya yemek yerken thread o satırda bekler, alt satırlardaki kodları çalıştıramaz. Diyelim ki filozof uyurken ölüm süresi (time_to_die) doldu; ancak uyanana kadar bunu fark edemez. Bu da "Ölüm en fazla 10ms gecikebilir" kuralının ihlal edilmesine sebep olur.
 Bu sorunu çözmek için masaya dışarıdan bakan ve uyumayan ayrı bir monitor_routine sistemi kurdum. Gözlemci sürekli olarak tüm filozofları tarayıp "Son yemeğinden bu yana ölüm süren geçmiş mi?" diye kilitler (mutex) eşliğinde kontrol ediyor. Eğer biri sınırda ölmüşse, o filozof daha uykusundan uyanamadan gözlemci is_dead = 1 bayrağını çekip simülasyonu anında bitiriyor.
+
+
+
+TEST DOSYASI THREAD İÇİN: 
+
+#include <pthread.h>
+#include <stdio.h>
+
+int counter = 0;   // paylasilan global degisken, mutex YOK
+pthread_mutex_t mutex_1;
+
+void *increment(void *arg)
+{
+    int i;
+
+    i = 0;
+    while (i < 100000)
+    {
+		pthread_mutex_lock(&mutex_1);
+		counter++;   // RACE: birden fazla thread ayni anda okuyup yaziyor
+		pthread_mutex_unlock(&mutex_1);
+        i++;
+    }
+    return (NULL);
+}
+
+	
+
+int main(void)
+{
+    pthread_t t1;
+    pthread_t t2;
+	pthread_t t3;
+	
+	pthread_mutex_init(&mutex_1, NULL);
+    pthread_create(&t1, NULL, increment, NULL);
+    pthread_create(&t2, NULL, increment, NULL);
+	pthread_create(&t3, NULL, increment, NULL);
+
+	pthread_join(t1, NULL);
+	pthread_join(t2, NULL);
+	pthread_join(t3, NULL);
+
+	pthread_mutex_destroy(&mutex_1);
+    printf("counter: %d\n", counter);
+    return (0);
+}
