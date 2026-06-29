@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycinarog <ycinarog@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: ycinarog <ycinarog@student.42istanbul.com  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 01:03:32 by ycinarog          #+#    #+#             */
 /*   Updated: 2026/06/29 18:26:57 by ycinarog         ###   ########.fr       */
