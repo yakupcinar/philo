@@ -91,6 +91,19 @@ Sağ çatal zaten 1. filozofun elinde olduğu için 5. filozof hiçbir çatal al
 
 Bu sayede 5. filozofun sol çatalı masada boş kalır! 4. filozof bu boş çatalı alır, yemeğini yer, bırakır ve kilitlenme (deadlock) matematiksel olarak imkansız hale gelir.
 
+1. gettimeofday Bize Ne Döndürür?
+C'de zamanı öğrenmek için <sys/time.h> kütüphanesindeki gettimeofday fonksiyonunu kullanırız. Bu fonksiyon bizden struct timeval adında bir yapı (struct) ister ve içini şu iki değerle doldurur:
+
+tv_sec: 1 Ocak 1970'ten bu yana geçen saniyeler.
+
+tv_usec: Geriye kalan küsurat, yani mikrosaniyeler.
+
+Philo subject'i bizden her şeyi milisaniye (ms) cinsinden hesaplamamızı ister. Bu yüzden bu iki değeri birleştirip milisaniyeye çevirmeliyiz:
+
+Saniyeyi milisaniyeye çevirmek için 1000 ile çarparız.
+
+Mikrosaniyeyi milisaniyeye çevirmek için 1000'e böleriz.
+
 
 TEST DOSYASI THREAD İÇİN: 
 
