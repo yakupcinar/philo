@@ -1,15 +1,5 @@
 ***PHILO KLASORÜ İÇERİSİNDE VERİLECEK İNDİĞİNDE PHİLO KLASÖRÜ VE YANINDA READ.ME OLUCAK (KOD PROJE FİLO İÇİNDE OLACAK)
 
-***Makefile'da PTHREAD flag ne işe yarıyor.
-
-***Fonksiyonlar long döndürcek long long olmasına gerek yok
-
-***Philo.h time to die, eat, sleep long olarak alınacak
-
-***ft_atoi de - kontrol ediyor mu
-
-***long long almak bir şeyi farkettirmez
-
 ***init.c assign fonksiyonu var if else bloğu 
 
 ***uslepp mikro saniye bekletir, senin ft_usleep ile onu milisaniyeye çevirip kullanmam lazım o yüzden get_current_time
