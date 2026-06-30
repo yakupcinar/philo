@@ -104,6 +104,17 @@ Saniyeyi milisaniyeye çevirmek için 1000 ile çarparız.
 
 Mikrosaniyeyi milisaniyeye çevirmek için 1000'e böleriz.
 
+2. Neden Normal usleep Yetmiyor? (Eval Sorusu!)
+Normal usleep fonksiyonu mikrosaniye cinsinden çalışır. Yani usleep(200) yazarsan, programı 200 milisaniye değil, 200 mikrosaniye (çok çok daha kısa) uyutur. Milisaniye uyutmak için sayıyı 1000 ile çarpıp usleep(time * 1000) yapabilirsin.
+
+Peki 42 bizden neden kendi ft_usleep'imizi yazmamızı istiyor? Çünkü standart usleep tembeldir ve saati şaşar.
+Eğer işletim sistemine usleep(200000) (200 ms) dersen, sistem o thread'i uyutur ve tam 200 ms sonra uyandıracağının garantisini vermez. Sistem yoğunsa bu süre 210 ms veya 220 ms olabilir. Philo gibi milisaniyelerin hayati olduğu bir projede bu sapmalar (drift) anında ölümle sonuçlanır.
+
+Ayrıca 200 ms boyunca thread'i tamamen uyutursan, filozof o 200 ms içinde açlıktan ölse bile, thread uyuduğu için ölüp ölmediğini kontrol edemezsin!
+
+3. Kusursuz ft_usleep Nasıl Çalışır?
+Bizim yazacağımız ft_usleep, argüman olarak doğrudan milisaniye alır. Mantığı şudur: "Hedeflenen zamana ulaşana kadar döngüde kal, ama CPU'yu %100 meşgul edip bilgisayarı dondurmamak için döngünün içinde çok çok küçük (örn: 500 mikrosaniye) standart usleep'ler at."
+
 
 TEST DOSYASI THREAD İÇİN: 
 
