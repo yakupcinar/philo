@@ -6,7 +6,7 @@
 /*   By: ycinarog <ycinarog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 01:05:35 by ycinarog          #+#    #+#             */
-/*   Updated: 2026/06/30 11:02:49 by ycinarog         ###   ########.fr       */
+/*   Updated: 2026/06/30 19:21:00 by ycinarog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,6 @@ int	check_if_dead(t_data *data)
 	status = data->is_dead;
 	pthread_mutex_unlock(&data->dead_mutex);
 	return (status);
-}
-
-static int	is_whitespace(char c)
-{
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
-		|| c == '\r');
 }
 
 long long	ft_atoi(const char *nptr)
