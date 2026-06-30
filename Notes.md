@@ -62,6 +62,14 @@ Bazı standart C kütüphanesi fonksiyonları (errno değişkeni gibi), tek thre
 
 -pthread kullanıldığında, derleyici bu fonksiyonları thread-safe sürümleriyle değiştirir (örneğin, errno artık her thread için ayrı bir bellek adresinde tutulur).
 
+2. Neden long long Tercih Ediliyor?
+Sadece long yazmak yerine long long (veya direkt uint64_t / int64_t) yazılmasının iki temel sebebi vardır:
+
+Garantiye Almak (Cross-Platform Güvenliği): Kodunun derlendiği bilgisayar (Mac, Linux, Windows fark etmeksizin) neresi olursa olsun, long long ifadesinin kesin olarak 64-bit (8 Byte) yer kaplayacağı C standartlarınca garanti edilmiştir. Savunmada (evaluation) kodunun beklenmedik bir işletim sistemi konfigürasyonunda patlamasını istemezsin.
+
+Mikrosaniye Hesapları: gettimeofday fonksiyonu bize zamanı mikrosaniye (tv_usec) cinsinden de verir. Mikrosaniyeler çok hızlı büyür. 32-bitlik bir sınır (yaklaşık 2.147.483.647), mikrosaniye cinsinden hesaplandığında sadece 35 dakika içinde dolup taşar! Eğer kodun bir yerinde yanlışlıkla milisaniyeyi mikrosaniyeye çevirip 32-bitlik bir değişkene (long veya int) eşitlersen, simülasyonun 35. dakikada çökecektir. long long kullanarak bu süreyi neredeyse sonsuza (yaklaşık 300 bin yıla) çıkarıyoruz.
+
+
 
 
 TEST DOSYASI THREAD İÇİN: 
