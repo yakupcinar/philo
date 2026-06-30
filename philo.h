@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycinarog <ycinarog@student.42istanbul.com  +#+  +:+       +#+        */
+/*   By: ycinarog <ycinarog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/29 01:06:20 by ycinarog          #+#    #+#             */
-/*   Updated: 2026/06/29 19:32:54 by ycinarog         ###   ########.fr       */
+/*   Created: 2026/06/30 10:49:34 by ycinarog          #+#    #+#             */
+/*   Updated: 2026/06/30 10:59:30 by ycinarog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef PHILO_H
 # define PHILO_H
@@ -22,9 +23,9 @@
 typedef struct s_data
 {
 	int				philo_count;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
+	long long		time_to_die;
+	long long		time_to_eat;
+	long long		time_to_sleep;
 	int				max_meals;
 	long long		start_time;
 	int				is_dead;
@@ -50,11 +51,9 @@ typedef struct s_philo
 
 long long			get_current_time(void);
 void				ft_usleep(int time_in_ms);
-long long			time_diff(long long past, long long pres);
 int					check_if_dead(t_data *data);
 int					ft_atoi(const char *nptr);
 
-void				assign_forks(t_philo *philo, t_data *data, int i);
 int					init_mutexes(t_data *data);
 int					init_philos(t_data *data, t_philo **philos);
 int					init_data(t_data *data, int argc, char **argv);
@@ -65,7 +64,5 @@ void				print_status(t_philo *philo, char *status);
 int					check_if_dead(t_data *data);
 
 int					start_simulation(t_data *data, t_philo *philos);
-
-void				clean_up(t_data *data, t_philo *philos);
 
 #endif

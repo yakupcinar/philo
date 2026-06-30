@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycinarog <ycinarog@student.42istanbul.com  +#+  +:+       +#+        */
+/*   By: ycinarog <ycinarog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 01:05:18 by ycinarog          #+#    #+#             */
-/*   Updated: 2026/06/29 18:26:16 by ycinarog         ###   ########.fr       */
+/*   Updated: 2026/06/30 10:59:25 by ycinarog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	assign_forks(t_philo *philo, t_data *data, int i)
+static void	assign_forks(t_philo *philo, t_data *data, int i)
 {
 	int	left_fork_index;
 	int	right_fork_index;

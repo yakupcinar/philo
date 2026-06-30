@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycinarog <ycinarog@student.42istanbul.com  +#+  +:+       +#+        */
+/*   By: ycinarog <ycinarog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 01:05:35 by ycinarog          #+#    #+#             */
-/*   Updated: 2026/06/29 18:27:00 by ycinarog         ###   ########.fr       */
+/*   Updated: 2026/06/30 11:02:49 by ycinarog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ void	ft_usleep(int time_in_ms)
 		usleep(500);
 }
 
-long long	time_diff(long long past, long long pres)
-{
-	return (pres - past);
-}
-
 int	check_if_dead(t_data *data)
 {
 	int	status;
@@ -51,29 +46,29 @@ static int	is_whitespace(char c)
 		|| c == '\r');
 }
 
-int	ft_atoi(const char *nptr)
+long long	ft_atoi(const char *nptr)
 {
-	int	i;
-	int	result;
-	int	sign;
+	int		i;
+	long	result;
 
-	if (!nptr)
-		return (0);
 	i = 0;
 	result = 0;
-	sign = 1;
-	while (is_whitespace(nptr[i]))
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
 		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			sign *= -1;
+	if (nptr[i] == '+')
 		i++;
-	}
+	else if (nptr[i] == '-') 
+		return (-1);
+	if (nptr[i] < '0' || nptr[i] > '9')
+		return (-1);
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		result = result * 10 + nptr[i] - '0';
+		result = result * 10 + (nptr[i] - '0');
+		if (result > 2147483647)
+			return (-1);
 		i++;
 	}
-	return (result * sign);
+	if (nptr[i] != '\0')
+		return (-1);
+	return (result);
 }
