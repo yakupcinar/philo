@@ -1,7 +1,5 @@
 ***PHILO KLASORÜ İÇERİSİNDE VERİLECEK İNDİĞİNDE PHİLO KLASÖRÜ VE YANINDA READ.ME OLUCAK (KOD PROJE FİLO İÇİNDE OLACAK)
 
-***init.c assign fonksiyonu var if else bloğu 
-
 ***uslepp mikro saniye bekletir, senin ft_usleep ile onu milisaniyeye çevirip kullanmam lazım o yüzden get_current_time
 
 
@@ -60,6 +58,38 @@ Garantiye Almak (Cross-Platform Güvenliği): Kodunun derlendiği bilgisayar (Ma
 Mikrosaniye Hesapları: gettimeofday fonksiyonu bize zamanı mikrosaniye (tv_usec) cinsinden de verir. Mikrosaniyeler çok hızlı büyür. 32-bitlik bir sınır (yaklaşık 2.147.483.647), mikrosaniye cinsinden hesaplandığında sadece 35 dakika içinde dolup taşar! Eğer kodun bir yerinde yanlışlıkla milisaniyeyi mikrosaniyeye çevirip 32-bitlik bir değişkene (long veya int) eşitlersen, simülasyonun 35. dakikada çökecektir. long long kullanarak bu süreyi neredeyse sonsuza (yaklaşık 300 bin yıla) çıkarıyoruz.
 
 
+1. usleep Sadece Bir "Ağrı Kesici"dir
+Çift numaralı filozofları başlangıçta (veya döngü içinde) usleep ile uyutmak, simülasyonun ilk birkaç saniyesinde harika çalışır. Trafik sıkışıklığını önler ve tek numaralıların rahatça yemeğe başlamasını sağlar.
+
+Sorun: Ancak usleep (veya ft_usleep) hiçbir zaman %100 hassas değildir. İşletim sistemi (CPU Scheduler), arka planda çalışan diğer programlara da kaynak ayırdığı için senin thread'ini tam vaktinde uyandırmayabilir.
+
+Sonuç: Simülasyon dakikalarca çalıştığında (özellikle süreler birbirine çok yakınsa, örn: 410 200 200), o başlarda kurduğun kusursuz "tekler yer, çiftler bekler" ritmi yavaş yavaş bozulmaya ve kaymaya başlar.
+
+2. Ölümcül An: Kilitlenme (Deadlock)
+Ritmin bozulduğu o an geldiğinde (diyelim ki simülasyonun 45. saniyesinde), masadaki 5 filozofun 5'i de tamamen aynı milisaniyede acıkıp masaya uzanabilir.
+
+Eğer asimetrik sıralama yoksa (yani herkes önce sol, sonra sağ çatalı alıyorsa):
+
+5 filozof da aynı anda sol çatalı alır.
+
+Herkes sağ çatalı almak için beklemeye başlar.
+
+Sağ çatallar başkalarının sol elinde olduğu için kimse sağ çatalı bulamaz.
+
+Kimse elindeki çatalı bırakmaz ve herkes açlıktan ölür (Deadlock).
+
+3. Asimetrik Çatal Alma "Gerçek Tedavi"dir
+Asimetrik çatal alma (örneğin filozofların her zaman numarası küçük olan çatalı önce alması veya teklerin önce sol, çiftlerin önce sağ çatalı alması), masadaki bu ölüm çemberini (circular wait) fiziksel olarak kırar.
+
+Diyelim ki ritim bozuldu ve herkes aynı milisaniyede çatal almaya çalıştı:
+
+4 filozof birinci kurala uyup sol çatalı alır.
+
+Ancak asimetrik kural sayesinde 5. filozof (veya ID'si farklı olan biri) sol yerine sağ çatalı almaya çalışır.
+
+Sağ çatal zaten 1. filozofun elinde olduğu için 5. filozof hiçbir çatal alamaz ve bekler.
+
+Bu sayede 5. filozofun sol çatalı masada boş kalır! 4. filozof bu boş çatalı alır, yemeğini yer, bırakır ve kilitlenme (deadlock) matematiksel olarak imkansız hale gelir.
 
 
 TEST DOSYASI THREAD İÇİN: 
