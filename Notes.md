@@ -115,6 +115,22 @@ Ayrıca 200 ms boyunca thread'i tamamen uyutursan, filozof o 200 ms içinde açl
 3. Kusursuz ft_usleep Nasıl Çalışır?
 Bizim yazacağımız ft_usleep, argüman olarak doğrudan milisaniye alır. Mantığı şudur: "Hedeflenen zamana ulaşana kadar döngüde kal, ama CPU'yu %100 meşgul edip bilgisayarı dondurmamak için döngünün içinde çok çok küçük (örn: 500 mikrosaniye) standart usleep'ler at."
 
+Klasik Yöntemin Tehlikesi (Neden Çökeriz?)
+Diyelim ki Makefile'ında kural eski usül şöyle yazıyor: %.o: %.c
+
+Kodu derledin (make). Her şey çalışıyor.
+
+Sonra philo.h dosyasını açtın ve t_philo struct'ının içine yeni bir değişken ekledin: int is_dead;
+
+Dosyayı kaydettin ve terminale tekrar make yazdın.
+
+Hata Burada Başlar: make programı sadece .c dosyalarının değiştirilme saatine bakar. Sen sadece .h dosyasını değiştirdiğin için make sana şunu söyler: "make: Nothing to be done for 'all'." (Derlenecek bir şey yok).
+
+Ornek:
+# .c dosyalarını .o dosyalarına çevirirken philo.h'ı da dinliyoruz
+%.o: %.c philo.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
 
 TEST DOSYASI THREAD İÇİN: 
 
