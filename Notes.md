@@ -51,6 +51,17 @@ Soru: Neden filozoflar kendi döngüleri içinde kendi ölümlerini kontrol etmi
 Cevap: Çünkü bir filozof ft_usleep fonksiyonuyla uyurken veya yemek yerken thread o satırda bekler, alt satırlardaki kodları çalıştıramaz. Diyelim ki filozof uyurken ölüm süresi (time_to_die) doldu; ancak uyanana kadar bunu fark edemez. Bu da "Ölüm en fazla 10ms gecikebilir" kuralının ihlal edilmesine sebep olur.
 Bu sorunu çözmek için masaya dışarıdan bakan ve uyumayan ayrı bir monitor_routine sistemi kurdum. Gözlemci sürekli olarak tüm filozofları tarayıp "Son yemeğinden bu yana ölüm süren geçmiş mi?" diye kilitler (mutex) eşliğinde kontrol ediyor. Eğer biri sınırda ölmüşse, o filozof daha uykusundan uyanamadan gözlemci is_dead = 1 bayrağını çekip simülasyonu anında bitiriyor.
 
+İşte -pthread flag'inin tam olarak yaptığı işler:
+1. Kütüphaneyi Linklemek (-lpthread)
+C dilinde pthread_create, pthread_mutex_lock gibi fonksiyonları kullanıyorsun ancak bu fonksiyonlar standart C kütüphanesinin (libc) doğrudan bir parçası değildir; sistemde ayrı bir kütüphane olan libpthread içinde tanımlıdırlar. -pthread bayrağı, derleyiciye şu komutu verir: "Programı oluştururken libpthread kütüphanesini de projeye dahil et (linkle)."
+
+2. Thread-Safe (İş Parçacığı Güvenli) Derleme
+Bu flag sadece bir kütüphane eklemez, aynı zamanda derleyiciye "bu program çoklu iş parçacığıyla çalışacak, buna göre derle" sinyalini gönderir.
+
+Bazı standart C kütüphanesi fonksiyonları (errno değişkeni gibi), tek thread'li bir yapıda farklı, çok thread'li bir yapıda farklı davranmak zorundadır.
+
+-pthread kullanıldığında, derleyici bu fonksiyonları thread-safe sürümleriyle değiştirir (örneğin, errno artık her thread için ayrı bir bellek adresinde tutulur).
+
 
 
 TEST DOSYASI THREAD İÇİN: 
