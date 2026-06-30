@@ -6,7 +6,7 @@
 /*   By: ycinarog <ycinarog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 10:49:34 by ycinarog          #+#    #+#             */
-/*   Updated: 2026/06/30 10:59:30 by ycinarog         ###   ########.fr       */
+/*   Updated: 2026/06/30 19:19:40 by ycinarog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_philo
 long long			get_current_time(void);
 void				ft_usleep(int time_in_ms);
 int					check_if_dead(t_data *data);
-int					ft_atoi(const char *nptr);
+long long			ft_atoi(const char *nptr);
 
 int					init_mutexes(t_data *data);
 int					init_philos(t_data *data, t_philo **philos);
